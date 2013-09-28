@@ -7,4 +7,4 @@ This a regression toolbox written in Javacript. This project is in development. 
 Contributors
 ------------
 
-* [gouthambs] Gouthaman Balaraman
+* [Gouthaman Balaraman] (https://github.com/gouthambs)
