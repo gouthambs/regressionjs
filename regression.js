@@ -1,5 +1,3 @@
-
-
 /**
  * Scope: Multiple linear regression; Different estimation methods such
  * as ordinary least squares, weighted least squares and generalized least 
@@ -8,7 +6,7 @@
  
 "use strict";
 var numeric = require('numeric');
-var regression = (typeof exports === "undefined") ? (function numeric() {}) : (module.exports);
+var regression = (typeof exports === "undefined") ? (function regression() {}) : (module.exports);
 
 (function(export_var){
 	// solving for the vector b in multiple linear 
