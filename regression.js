@@ -54,17 +54,32 @@ var regression = (typeof exports === "undefined") ? (function regression() {}) :
 	{
 		var ncols	= X.length; 	// number of observations
 		var W 		= numeric.identity(ncols);
-		var X_tran	= numeric.transpose(X);
-		for (var i=0; i<ncols; ++i)
+		if (weights instanceof Array)
 		{
-			W[i][i] = weights[i];	
+			for (var i=0; i<ncols; ++i)
+			{
+				W[i][i] = weights[i];	
+			}
+		}else if (typeof weights == 'function')
+		{
+			for (var i=0; i<ncols; ++i)
+			{
+				W[i][i]		= weights(X[i]);
+			}
 		}
+		var X_tran	= numeric.transpose(X);
 		var nr_mat 	= numeric.dot(X_tran,numeric.dot(W,Y));
 		var dr_mat	= numeric.inv(numeric.dot(X_tran,numeric.dot(W,X)));
 		var b		= numeric.dot(dr_mat,nr_mat);
 		return b;
 	};
-	
+	var regressionFunction = function(b)
+	{
+		return function(x)
+		{
+			return  numeric.dot(x,b)[0];
+		};
+	};
 	// all the exports here
 	// basic stat functions
 	export_var.mean		 				= mean;
@@ -74,6 +89,6 @@ var regression = (typeof exports === "undefined") ? (function regression() {}) :
 	// regression module
 	export_var.olsEstimation 			= olsEstimation;
 	export_var.wlsEstimation 			= wlsEstimation;
-	
+	export_var.regressionFunction		= regressionFunction;
 }(regression));
 
