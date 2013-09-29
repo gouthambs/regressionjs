@@ -2,8 +2,8 @@
 "use strict";
 var regression 	= require('./regression');
 
-exports.ols_estimator_test = function(test)
-{
+module.exports = { 
+'ols_estimator_test' : function(test){
 	var y = [[.15],
 	         [.25],
 	         [.5],
@@ -29,9 +29,9 @@ exports.ols_estimator_test = function(test)
 	test.equal(b[1][0],0.6660860367398023);
 	test.equal(b[2][0],0.4485050801075223);
 	test.done();
-};
+	},
 
-exports.wls_estimator_test = function(test)
+'wls_estimator_test' : function(test)
 {
 	var y = [[.15],
 	         [.25],
@@ -59,28 +59,32 @@ exports.wls_estimator_test = function(test)
 	test.equal(b[1][0],2.492063492063469);
 	test.equal(b[2][0], -0.23809523809523547);
 	test.done();
-};
-exports.mean_test = function(test)
+},
+'mean_test' : function(test)
 {
 	var V = [0,2,4,6,7];
 	var m = regression.mean(V);
 	test.equal(m,3.8,"Failed mean calculation test");
 	test.done();
-};
-exports.population_variance_test = function(test)
+},
+'population_variance_test' : function(test)
 {
-	var V = [0,2,4,6,7];
-	var m = regression.mean(V);
-	var pv = regression.populationVariance(V,m);
+	var V 	= [0,2,4,6,7];
+	var m 	= regression.mean(V);
+	var pv 	= regression.populationVariance(V,m);
 	test.equal(pv,6.56,"Failed population variance test");
+	var pv2	= regression.populationVariance(V);
+	test.equal(pv2,6.56,"Failed population variance test");
 	test.done();
-};
-exports.sample_variance_test = function(test)
+},
+'sample_variance_test' : function(test)
 {
 	var V = [0,2,4,6,7];
 	var m = regression.mean(V);
 	var pv = regression.sampleVariance(V,m);
 	test.equal(pv,8.2,"Failed sample variance test");
+	var pv2	= regression.sampleVariance(V);
+	test.equal(pv2,8.2,"Failed population variance test");
 	test.done();
+}
 };
-

@@ -16,22 +16,24 @@ var regression = (typeof exports === "undefined") ? (function regression() {}) :
 		for (var i=0; i<len; ++i){  val += V[i]; }
 		return val*1./len;
 	};
-	var populationVariance = function(V,mean)
+	var populationVariance = function(V,mean_val)
 	{
-		var len = V.length;
-		var val = 0.0;
-		for (var i=0; i<len; ++i){  val += (V[i]-mean)*(V[i]-mean); }
+		var len 	= V.length;
+		var val 	= 0.0;
+		mean_val 	= (typeof mean_val == "undefined") ? (mean(V)) : mean_val; 
+		for (var i=0; i<len; ++i){  val += (V[i]-mean_val)*(V[i]-mean_val); }
 		return val*1./len;
 	};
-	var sampleVariance = function(V,mean)
+	var sampleVariance = function(V,mean_val)
 	{
 		var len 	= V.length;
 		var variance = 0.0;
 		if (len!=1)
 		{
-			var val = 0.0;
-			for (var i=0; i<len; ++i){  val += (V[i]-mean)*(V[i]-mean); }
-			variance = val*1./(len-1);
+			var val 	= 0.0;
+			mean_val 	= (typeof mean_val == "undefined") ? (mean(V)) : mean_val;
+			for (var i=0; i<len; ++i){  val += (V[i]-mean_val)*(V[i]-mean_val); }
+			variance 	= val*1./(len-1);
 		}
 		return variance;
 	};
