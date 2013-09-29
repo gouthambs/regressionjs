@@ -53,11 +53,18 @@ module.exports = {
 	         [1.,-.05, -.23],
 	         [1.,-.25 ,-.40],
 	         [1.,.15 ,.65]];
-	var b = regression.wlsEstimation(y,A);
+	// with uniform weights WLS estimation should 
+	// be the same as OLS estimation;
+	var b = regression.wlsEstimation(y,A,[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]);
+	test.equal(b[0][0],-0.009283302118409553);
+	test.equal(b[1][0],0.6660860367398023);
+	test.equal(b[2][0],0.4485050801075223);
+	// weight the mid ones more than the edge ones
+	var b2 = regression.wlsEstimation(y,A,[0.5,0.5,0.5,1.0,1.0,1.0,1.0,0.5,0.5,0.5]);
+	test.equal(b2[0][0],-0.008761466727384981);
+	test.equal(b2[1][0],0.4967692480404766);
+	test.equal(b2[2][0],0.49808204778667453);
 	
-	test.equal(b[0][0],-0.003968253968253066);
-	test.equal(b[1][0],2.492063492063469);
-	test.equal(b[2][0], -0.23809523809523547);
 	test.done();
 },
 'mean_test' : function(test)
