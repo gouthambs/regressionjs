@@ -109,5 +109,15 @@ module.exports = {
 	var pv2	= regression.sampleVariance(V);
 	test.equal(pv2,8.2,"Failed population variance test");
 	test.done();
+},
+'median_test' : function(test)
+{
+	var V 	= [0,3,1,2];
+	var m 	= regression.median(V);
+	test.equal(m,1.5);
+	var V2 	= [0,3,1,2,5];
+	var m2 	= regression.median(V2);
+	test.equal(m2,2);
+	test.done();
 }
 };
